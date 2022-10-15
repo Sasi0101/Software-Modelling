@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd;ac.soton.xeventb.xcontext.base">
+    <org.eventb.core.scAxiom name="'" org.eventb.core.label="rootUser" org.eventb.core.predicate="rootUser∈USER" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.axiom#_OL4Y8Kv9Eeu42NN7GJ2wow" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scAxiom name="(" org.eventb.core.label="DEFAULT_PASSWORD-def" org.eventb.core.predicate="defaultPassword∈PASSWORD" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.axiom#_OL4Y8av9Eeu42NN7GJ2wow" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scConstant name="rootUser" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.constant#_OL3x4Kv9Eeu42NN7GJ2wow" org.eventb.core.type="USER"/>
+    <org.eventb.core.scCarrierSet name="USER" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.carrierSet#_OL3K0Kv9Eeu42NN7GJ2wow" org.eventb.core.type="ℙ(USER)"/>
+    <org.eventb.core.scConstant name="defaultPassword" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.constant#_OL3x4av9Eeu42NN7GJ2wow" org.eventb.core.type="PASSWORD"/>
+    <org.eventb.core.scCarrierSet name="PASSWORD" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.carrierSet#_OL3K0av9Eeu42NN7GJ2wow" org.eventb.core.type="ℙ(PASSWORD)"/>
+</org.eventb.core.scContextFile>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd;ac.soton.xeventb.xcontext.base">
+    <org.eventb.core.scCarrierSet name="QUEUE" org.eventb.core.source="/Coursework2_Software/BorrowingContext.buc|org.eventb.core.contextFile#BorrowingContext|org.eventb.core.carrierSet#_T7a0AK6BEeuO3fQAMZFndw" org.eventb.core.type="ℙ(QUEUE)"/>
+</org.eventb.core.scContextFile>

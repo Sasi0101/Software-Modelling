@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="6">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="6">
+        <org.eventb.core.poIdentifier name="USER" org.eventb.core.type="ℙ(USER)"/>
+        <org.eventb.core.poIdentifier name="PASSWORD" org.eventb.core.type="ℙ(PASSWORD)"/>
+        <org.eventb.core.poIdentifier name="rootUser" org.eventb.core.type="USER"/>
+        <org.eventb.core.poIdentifier name="defaultPassword" org.eventb.core.type="PASSWORD"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/Coursework2_Software/OnlineLibrarySystemContext.bpo|org.eventb.core.poFile#OnlineLibrarySystemContext|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="6">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="rootUser∈USER" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.axiom#_OL4Y8Kv9Eeu42NN7GJ2wow"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="defaultPassword∈PASSWORD" org.eventb.core.source="/Coursework2_Software/OnlineLibrarySystemContext.buc|org.eventb.core.contextFile#OnlineLibrarySystemContext|org.eventb.core.axiom#_OL4Y8av9Eeu42NN7GJ2wow"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

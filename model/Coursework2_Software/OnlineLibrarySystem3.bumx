@@ -1,0 +1,171 @@
+machine OnlineLibrarySystem3
+refines OnlineLibrarySystem2
+sees OnlineLibrarySystemContext ResourceContext ReadingListContext BorrowingContext
+
+/*We declare the variables that we are going to use */
+variables
+	registeredUsers
+	administrators
+	lecturers
+	loggedInUsers
+	loggingPassword
+	
+	resource
+	book
+	article
+	website
+	authors
+	urls
+	titles
+	getAuthor
+	getURL
+	getTitle
+	publisher
+	publishedYear
+	isbn
+	getPublisher
+	getPublishedYear
+	getISBN
+	lists
+	getResources
+	getCreator
+	
+	getTotalTokens
+	getCurrentTokens
+	getBooks
+	
+	getReserves	
+	queue
+	bookQueues
+	getStudent
+	
+	/*Handling the invariants */
+	invariants
+	@inv25:getTotalTokens ∈ book → ℕ
+	@inv26:getCurrentTokens ∈ book → ℕ
+	@inv27:getBooks ∈ registeredUsers ↔ book
+	@inv28:getReserves ∈ book → ℕ
+	@inv29:getStudent ∈ ℕ ⇸ registeredUsers
+	@inv30:queue ⊆ QUEUE
+	@inv31:bookQueues ∈ book → queue
+events
+	event INITIALISATION extends INITIALISATION
+	begin
+	/*Setting every invariant initially to an empty set
+	 */
+	@beg25:getTotalTokens ≔ ∅
+	@beg26:getCurrentTokens ≔ ∅
+	@beg27:getBooks ≔ ∅
+	@beg28:getReserves ≔ ∅
+	@beg29:getStudent ≔ ∅
+	@beg30:queue ≔ ∅
+	@beg31:bookQueues ≔ ∅
+	end
+
+	event LogIn extends LogIn
+	end
+
+	event LogOut extends LogOut
+	end
+
+	event RegisterUser extends RegisterUser
+	end
+
+	event ChangePassword extends ChangePassword
+	end
+
+	event ChangeToAdministrator extends ChangeToAdministrator
+	end
+
+	event ChangeToLecturer extends ChangeToLecturer
+	end
+
+	event CreateBook extends CreateBook
+	end
+
+	event RemoveBook extends RemoveBook
+	end
+
+	event CreateWebsite extends CreateWebsite
+	end
+
+	event CreateArticle extends CreateArticle
+	end
+
+	event RemoveWebsite extends RemoveWebsite
+	end
+
+	event RemoveArticle extends RemoveArticle
+	end
+
+	event SearchByTitle extends SearchByTitle
+	end
+
+	event SearchByISBN extends SearchByISBN
+	end
+
+	event CreateReadingList extends CreateReadingList
+	end
+
+	event RemoveReadingList extends RemoveReadingList
+	end
+
+	event AddResourceToList extends AddResourceToList
+	end
+
+	event RemoveResourceFromList extends RemoveResourceFromList
+	end
+	
+	/*The event to borrow a book onlu a registered and logged in user can borrow a book if there is still license
+	 * for that book
+	 */
+	event BorrowBook
+	any u b where
+		@grd1:b ∈ book //Checking if b is part of book
+		@grd2:getTotalTokens(b) > getCurrentTokens(b) // Checking if there are still tokens available to borrow a book
+		@grd3:u ∈ registeredUsers // Checking if u is a registered user
+		@grd4:u ∈ loggedInUsers //Checking if u is logged in
+	then
+	/*We increase the curretnTokens for this book by one and assign the book */
+		@act1:getCurrentTokens(b) ≔ getCurrentTokens(b) + 1
+		@act2:getBooks(u) ≔ b
+	end
+	
+	/*The event to reserve a book only  a logged in user can reserve a book */
+	event ReserveBook
+	any u b where
+		@grd1:b ∈ book//Checking if b is part of book
+		@grd2:getTotalTokens(b) ≤ getCurrentTokens(b)//Ckecking if there are no more tokens available
+		@grd3:u ∈ registeredUsers // Checking if u is a registered user
+		@grd4:u ∈ loggedInUsers//Checking if u is logged in
+	then
+		@act1:getReserves(b) ≔ getReserves(b) + 1
+		@act2:getStudent(getReserves(b)) ≔ u
+	end
+	
+	/*The event to return a book that can be done by a user */
+	event ReturnBook
+	any u b where
+		@grd1:b ∈ book//Checking if b is part of book
+		@grd2:u ∈ registeredUsers//Checking if u is a registered user
+		@grd3:u ∈ loggedInUsers//Checking if u is a logged in user
+	then
+	/*Returning the book and decreasing the used tokens*/
+		@act1:getBooks ≔ getBooks ∖ {u ↦ b}
+		@act2:getCurrentTokens(b) ≔ getCurrentTokens(b) − 1
+	end
+	
+	/*The event to revoke a book and it can be done by the administrator */
+	event RevokeBook
+	any a u b where
+		@grd1:b ∈ book//Checking if b is part of book
+		@grd2:a ∈ administrators//Checking if a is an administrator
+		@grd3:u ∈ registeredUsers//Checking if u is a registered user
+		@grd4:a ∈ loggedInUsers//Checking if a is logged in
+	then
+	/*We revoke the book */
+		@act1:getReserves(b) ≔ getReserves(b) + 1
+		@act2:getStudent(getReserves(b)) ≔ u
+	end
+
+end

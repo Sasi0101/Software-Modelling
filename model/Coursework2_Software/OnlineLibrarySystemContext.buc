@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd;ac.soton.xeventb.xcontext.base" org.eventb.core.generated="false" version="3">
+    <org.eventb.core.carrierSet name="_OL3K0Kv9Eeu42NN7GJ2wow" org.eventb.core.generated="false" org.eventb.core.identifier="USER"/>
+    <org.eventb.core.carrierSet name="_OL3K0av9Eeu42NN7GJ2wow" org.eventb.core.generated="false" org.eventb.core.identifier="PASSWORD"/>
+    <org.eventb.core.constant name="_OL3x4Kv9Eeu42NN7GJ2wow" org.eventb.core.generated="false" org.eventb.core.identifier="rootUser"/>
+    <org.eventb.core.constant name="_OL3x4av9Eeu42NN7GJ2wow" org.eventb.core.generated="false" org.eventb.core.identifier="defaultPassword"/>
+    <org.eventb.core.axiom name="_OL4Y8Kv9Eeu42NN7GJ2wow" org.eventb.core.generated="false" org.eventb.core.label="rootUser" org.eventb.core.predicate="rootUser ∈ USER"/>
+    <org.eventb.core.axiom name="_OL4Y8av9Eeu42NN7GJ2wow" org.eventb.core.generated="false" org.eventb.core.label="DEFAULT_PASSWORD-def" org.eventb.core.predicate="defaultPassword ∈ PASSWORD"/>
+</org.eventb.core.contextFile>

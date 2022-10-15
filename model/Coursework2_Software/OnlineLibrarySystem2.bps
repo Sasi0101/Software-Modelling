@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.psFile>
+    <org.eventb.core.psStatus name="INITIALISATION/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="INITIALISATION/inv24/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangeToLecturer/inv24/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="CreateBook/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveBook/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="CreateWebsite/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="CreateArticle/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveWebsite/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveArticle/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="CreateReadingList/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="CreateReadingList/inv24/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveReadingList/grd4/WD" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveReadingList/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveReadingList/inv24/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="AddResourceToList/grd4/WD" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="AddResourceToList/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveResourceFromList/grd4/WD" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RemoveResourceFromList/inv23/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="47" org.eventb.core.psManual="false"/>
+</org.eventb.core.psFile>

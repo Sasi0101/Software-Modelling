@@ -1,0 +1,148 @@
+machine OnlineLibrarySystem2
+refines OnlineLibrarySystem1
+sees OnlineLibrarySystemContext ResourceContext ReadingListContext
+variables
+	registeredUsers
+	administrators
+	lecturers
+	loggedInUsers
+	loggingPassword
+	resource
+	book
+	article
+	website
+	authors
+	urls
+	titles
+	getAuthor
+	getURL
+	getTitle
+	publisher
+	publishedYear
+	isbn
+	getPublisher
+	getPublishedYear
+	getISBN
+	lists
+	getResources
+	getCreator
+invariants
+	@inv22: lists ⊆ LIST
+	@inv23: getResources ∈ lists ↔ resource
+	@inv24: getCreator ∈ lists → lecturers
+events
+	event INITIALISATION extends INITIALISATION
+	then
+		@beg22: lists ≔ ∅
+		@beg23: getResources ≔ ∅
+		@beg24: getCreator ≔ ∅
+	end
+
+	event LogIn extends LogIn
+	end
+
+	event LogOut extends LogOut
+	end
+
+	event RegisterUser extends RegisterUser
+	end
+
+	event ChangePassword extends ChangePassword
+	end
+
+	event ChangeToAdministrator extends ChangeToAdministrator
+	end
+
+	event ChangeToLecturer extends ChangeToLecturer
+	end
+
+	event CreateBook extends CreateBook
+	end
+
+	event RemoveBook extends RemoveBook
+	then
+		@act12: getResources ≔ getResources ⩥ {b}
+	end
+
+	event CreateWebsite extends CreateWebsite
+	end
+
+	event CreateArticle extends CreateArticle
+	end
+
+	event RemoveWebsite extends RemoveWebsite
+	then
+		@act8: getResources ≔ getResources ⩥ {w}
+	end
+
+	event RemoveArticle extends RemoveArticle
+	then
+		@act10: getResources ≔ getResources ⩥ {a}
+	end
+
+	event SearchByTitle extends SearchByTitle
+	end
+
+	event SearchByISBN extends SearchByISBN
+	end
+
+	event CreateReadingList
+	any
+		lect
+		lis
+	where
+		@grd1: lect ∈ lecturers
+		@grd2: lect ∈ loggedInUsers
+		@grd3: lis ∈ LIST
+		@grd4: lis ∉ lists
+	then
+		@act1: lists ≔ lists ∪ {lis}
+		@act2: getCreator(lis) ≔ lect
+	end
+
+	event RemoveReadingList
+	any
+		lect
+		lis
+	where
+		@grd1: lect ∈ lecturers
+		@grd2: lect ∈ loggedInUsers
+		@grd3: lis ∈ lists
+		@grd4: getCreator(lis) = lect
+	then
+		@act1: getCreator ≔ {lis} ⩤ getCreator
+		@act2: getResources ≔ {lis} ⩤ getResources
+		@act3: lists ≔ lists ∖ {lis}
+	end
+
+	event AddResourceToList
+	any
+		lect
+		lis
+		res
+	where
+		@grd1: lect ∈ lecturers
+		@grd2: lect ∈ loggedInUsers
+		@grd3: lis ∈ lists
+		@grd4: getCreator(lis) = lect
+		@grd5: res ∈ resource
+	then
+		@act1: getResources(lis) ≔ res
+	end
+
+	event RemoveResourceFromList
+	any
+		lect
+		lis
+		res
+	where
+		@grd1: lect ∈ lecturers
+		@grd2: lect ∈ loggedInUsers
+		@grd3: lis ∈ lists
+		@grd4: getCreator(lis) = lect
+		@grd5: res ∈ resource
+	then
+		@act1: getResources ≔ getResources ∖ {lis ↦ res}
+	end
+
+end

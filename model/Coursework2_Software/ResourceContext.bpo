@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="3">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="3">
+        <org.eventb.core.poIdentifier name="AUTHORS" org.eventb.core.type="ℙ(AUTHORS)"/>
+        <org.eventb.core.poIdentifier name="URLS" org.eventb.core.type="ℙ(URLS)"/>
+        <org.eventb.core.poIdentifier name="PUBLISHED_YEAR" org.eventb.core.type="ℙ(PUBLISHED_YEAR)"/>
+        <org.eventb.core.poIdentifier name="PUBLISHER" org.eventb.core.type="ℙ(PUBLISHER)"/>
+        <org.eventb.core.poIdentifier name="RESOURCE" org.eventb.core.type="ℙ(RESOURCE)"/>
+        <org.eventb.core.poIdentifier name="TITLES" org.eventb.core.type="ℙ(TITLES)"/>
+        <org.eventb.core.poIdentifier name="ISBN" org.eventb.core.type="ℙ(ISBN)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/Coursework2_Software/ResourceContext.bpo|org.eventb.core.poFile#ResourceContext|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="3"/>
+</org.eventb.core.poFile>

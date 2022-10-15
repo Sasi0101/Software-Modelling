@@ -1,0 +1,244 @@
+machine OnlineLibrarySystem1
+refines OnlineLibrarySystem
+sees OnlineLibrarySystemContext ResourceContext
+
+/*Declaring the variables we are going to use */
+variables
+	registeredUsers
+	administrators
+	lecturers
+	loggedInUsers
+	loggingPassword
+	resource
+	book
+	article
+	website
+	authors
+	urls
+	titles
+	getAuthor
+	getURL
+	getTitle
+	publisher
+	publishedYear
+	isbn
+	getPublisher
+	getPublishedYear
+	getISBN
+	
+	/*Declaring the invariants we are going to use */
+invariants
+    @inv8:resource ⊆ RESOURCE
+	@inv9:partition(resource, book, website, article)
+	@inv10:authors ⊆ AUTHORS
+	@inv11:titles ⊆ TITLES
+	@inv12:urls ⊆ URLS
+	@inv13:getAuthor ∈ (resource ∪ book ∪ website ∪ article) ↔ authors // we need to change this one
+	@inv14:getURL ∈ (resource) ⤖ urls
+	@inv15:getTitle ∈ (resource) ⤖ titles
+	@inv16:isbn ⊆ ISBN
+	@inv17:publisher ⊆ PUBLISHER
+	@inv18:publishedYear ⊆ PUBLISHED_YEAR
+	@inv19:getPublisher ∈ ((resource) ∖ (website)) → publisher
+	@inv20:getISBN ∈ book ⤖ isbn
+	@inv21:getPublishedYear ∈ ((resource) ∖ (website)) → publishedYear
+	
+events
+/* We initialize everything what we are going to use (our variables) */
+	event INITIALISATION extends INITIALISATION
+	begin
+	@beg6:resource ≔ ∅
+	@beg7:book ≔ ∅
+	@beg8:article ≔ ∅
+	@beg9:website ≔ ∅
+	@beg10:authors ≔ ∅
+	@beg11:urls ≔ ∅
+	@beg12:titles ≔ ∅
+	@beg13:getAuthor ≔ ∅
+	@beg14:getURL ≔ ∅
+	@beg15:getTitle ≔ ∅
+	@beg16:publisher ≔ ∅
+	@beg17:publishedYear ≔ ∅
+	@beg18:isbn ≔ ∅
+	@beg19:getPublisher ≔ ∅
+	@beg20:getPublishedYear ≔ ∅
+	@beg21:getISBN ≔ ∅
+	end
+
+	event LogIn extends LogIn
+	end
+
+	event LogOut extends LogOut
+	end
+
+	event RegisterUser extends RegisterUser
+	end
+
+	event ChangePassword extends ChangePassword
+	end
+
+	event ChangeToAdministrator extends ChangeToAdministrator
+	end
+
+	event ChangeToLecturer extends ChangeToLecturer
+	end
+	
+	/* The event to create a new book, this event can only be done by a logged in administrator */
+	event CreateBook
+    any a b publish publishedY tit ur is auth where
+    	@grd1:a ∈ administrators // Check if a is an administrator
+    	@grd2:a ∈ loggedInUsers // Check if a is logged in 
+    	@grd3:b ∈ RESOURCE // Check if b is part of the RESOURCE set
+    	@grd4:b ∉ (book ∪ resource) // Check if b is not part of the resource \/ book
+    	/* We check if is, publishedY, publish, auth, ur, tit is part or not part of the appropriate sets */
+    	@grd5:is ∈ ISBN
+    	@grd6: is ∉ isbn
+    	@grd7:publishedY ∈ PUBLISHED_YEAR
+    	@grd8:publish ∈ PUBLISHER
+    	@grd9:auth ∈ AUTHORS
+    	@grd10:ur ∈ URLS
+    	@grd11: ur ∉ urls
+    	@grd12:tit ∈ TITLES
+    	@grd13: tit ∉ titles
+    then
+    /* We add b to book and resources */
+        @act1:resource ≔ resource ∪ {b}
+    	@act2:book ≔ book ∪ {b}
+    	@act3:isbn ≔ isbn ∪ {is}
+    	@act4:publishedYear ≔ publishedYear ∪ {publishedY}
+    	@act5:publisher ≔ publisher ∪ {publish}
+    	@act6:authors ≔ authors ∪ {auth}
+    	@act7:urls ≔ urls ∪ {ur}
+    	@act8:titles ≔ titles ∪ {tit}
+    	@act9: getISBN(b) ≔ is
+    	@act10: getPublishedYear(b) ≔ publishedY
+    	@act11: getPublisher(b) ≔ publish
+    	@act12: getAuthor(b) ≔ auth
+    	@act13: getURL(b) ≔ ur
+    	@act14: getTitle(b) ≔ tit
+    end
+    
+    /* The event to remove a book, can only be done by a logged in administrator */
+    event RemoveBook 
+    any b a where
+        @grd1: a ∈ administrators // Check if a is administrator
+        @grd2: a ∈ loggedInUsers // Check if a is logged in
+        @grd3: b ∈ (resource ∩ book) // Check if the b (book) is not part of the resource /\ book
+    then
+    /* We remove everything that is connected to b from everywhere */
+        @act1: book ≔ book ∖ {b}
+        @act2: resource ≔ resource ∖ {b}
+        @act3: isbn ≔ isbn ∖ {getISBN(b)}
+        @act4: titles ≔ titles ∖ {getTitle(b)}
+        @act5: urls ≔ urls ∖ {getURL(b)}
+        @act6:getISBN ≔ {b} ⩤ getISBN
+        @act7:getTitle ≔ {b} ⩤ getTitle
+        @act8:getAuthor ≔ {b} ⩤ getAuthor
+        @act9:getPublisher ≔ {b} ⩤ getPublisher
+        @act10:getPublishedYear ≔ {b} ⩤ getPublishedYear
+        @act11:getURL ≔ {b} ⩤ getURL
+    end
+
+	/*The event to  create a new website which can only be done by a logged in lecturer*/
+	event CreateWebsite
+		any l w auth ur tit where 
+			@grd1: l ∈ (lecturers ∩ loggedInUsers) // Check if the l is a lecturer and if it is logged in
+			@grd2: w ∉ (resource ∪ website) // Check if w is not part of our resource \/ website
+			@grd3: w ∈ RESOURCE // Check if w is part of RESOURCE
+			@grd4: auth ∈ AUTHORS //Check if auth is part of the AUTHORS
+    		@grd5: ur ∈ URLS // Check if ur is part of URLS
+    		@grd6: ur ∉ urls // Check if ur is not part of our urls
+    		@grd7: tit ∈ TITLES // Check if tit is part of TITLE
+    		@grd8: tit ∉ titles// Check if tit is not part of our titles
+    	then 
+    	/*If all the grds are true we add the website with the author title and url */
+    		@act1: resource ≔ resource ∪ {w}
+    		@act2: website ≔ website ∪ {w}
+    		@act3: authors ≔ authors ∪ {auth}
+    		@act4: urls ≔ urls ∪ {ur}
+    		@act5: titles ≔ titles ∪ {tit}
+    		@act6: getAuthor(w) ≔ auth
+    		@act7: getURL(w) ≔ ur
+    		@act8: getTitle(w) ≔ tit
+    	end
+    
+    /*The event to create a new article which can only be done by a logged in lecturer */
+    event CreateArticle
+    	any a l auth ur tit publish publishedY where
+    		@grd1: l ∈ (lecturers ∩ loggedInUsers) //Check if l is a lecturer and if it is logged in
+    		@grd2: a ∉ (resource ∪ article) // Check if a is not part of the resource \/ article
+    		@grd3: a ∈ RESOURCE // Check if a is part of RESOURCE
+    		@grd4: auth ∈ AUTHORS// Check is auth is part of AUTHORS
+    		@grd5: ur ∈ URLS //Check if ur is part of the URLS
+    		@grd6: ur ∉ urls // Check if ur is not part of our urls
+    		@grd7: tit ∈ TITLES //Check if tit is part of all TITLES
+    		@grd8: tit ∉ titles// Check if tit is not part of our titles
+    		@grd9:publishedY ∈ PUBLISHED_YEAR //Check if publishedY is part of PUBLISHED_YEAR
+    		@grd10:publish ∈ PUBLISHER//Check if publish is part of PUBLISHER
+    	then
+    	/*We are going to add the article to the resource and article and we add all properties related to this article */
+    		@act1: resource ≔ resource ∪ {a}
+    		@act2: article ≔ article ∪ {a}
+    		@act3: authors ≔ authors ∪ {auth}
+    		@act4: urls ≔ urls ∪ {ur}
+    		@act5: titles ≔ titles ∪ {tit}
+    		@act6: getAuthor(a) ≔ auth
+    		@act7: getURL(a) ≔ ur
+    		@act8: getTitle(a) ≔ tit
+    		@act9:publishedYear ≔ publishedYear ∪ {publishedY}
+    		@act10:publisher ≔ publisher ∪ {publish}
+    		@act11: getPublishedYear(a) ≔ publishedY
+    		@act12: getPublisher(a) ≔ publish
+    	end
+    
+    /*The event to remove an existing website */
+    event RemoveWebsite
+    	any w l where
+    		@grd1: l ∈ (lecturers ∩ loggedInUsers)//Check if the user who wants to remove it is logged in and a lecturer as well
+    		@grd2: w ∈ (resource ∩ website)//Check if w is part or resource /\ website
+    	then
+    	/*We remove everything that is related to website w */
+    		@act1: website ≔ website ∖ {w}
+    		@act2: resource ≔ resource ∖ {w}
+        	@act3: titles ≔ titles ∖ {getTitle(w)}
+        	@act4: urls ≔ urls ∖ {getURL(w)}
+        	@act5:getTitle ≔ {w} ⩤ getTitle
+        	@act6:getAuthor ≔ {w} ⩤ getAuthor
+         	@act7:getURL ≔ {w} ⩤ getURL
+    end
+    
+    /*The event to remove an existing article */
+    event RemoveArticle
+    	any a l where
+    		@grd1: l ∈ (lecturers ∩ loggedInUsers)//Check if the user l trying to remove the article is a leturer and if it is logged in
+    		@grd2: a ∈ (resource ∩ article)//Check if a is part of resource /\ article
+    	then
+    	/*We remove everything related to article a */
+    		@act1: article ≔ article ∖ {a}
+    		@act2: resource ≔ resource ∖ {a}
+        	@act3: titles ≔ titles ∖ {getTitle(a)}
+        	@act4: urls ≔ urls ∖ {getURL(a)}
+        	@act5:getTitle ≔ {a} ⩤ getTitle
+        	@act6:getAuthor ≔ {a} ⩤ getAuthor
+         	@act7:getURL ≔ {a} ⩤ getURL
+         	@act8:getPublisher ≔ {a} ⩤ getPublisher
+       		@act9:getPublishedYear ≔ {a} ⩤ getPublishedYear
+         end
+	
+	/*The event to search by a title */         
+    event SearchByTitle
+    	any r t where
+        	@grd1:r ∈ resource
+        	@grd2:t ∈ titles
+        	@grd3:getTitle(r) = t
+    end
+    
+    /*The event to search by ISBN */
+    event SearchByISBN
+    	any b i where
+        	@grd1:b ∈ book
+        	@grd2:i ∈ isbn
+        	@grd3:getISBN(b) = i
+    end
+    
+end

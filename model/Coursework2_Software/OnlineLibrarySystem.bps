@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.psFile>
+    <org.eventb.core.psStatus name="INITIALISATION/inv2/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="INITIALISATION/inv3/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="INITIALISATION/inv4/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="INITIALISATION/inv5/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="INITIALISATION/inv6/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="INITIALISATION/inv7/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="LogIn/grd3/WD" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="LogIn/inv7/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="LogOut/inv7/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RegisterUser/inv2/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RegisterUser/inv3/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RegisterUser/inv6/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="RegisterUser/inv7/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangePassword/inv6/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangeToAdministrator/inv2/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangeToAdministrator/inv4/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangeToAdministrator/inv5/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangeToLecturer/inv3/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+    <org.eventb.core.psStatus name="ChangeToLecturer/inv4/INV" org.eventb.core.confidence="1000" org.eventb.core.poStamp="77" org.eventb.core.psManual="false"/>
+</org.eventb.core.psFile>

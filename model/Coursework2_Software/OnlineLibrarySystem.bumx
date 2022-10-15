@@ -1,0 +1,91 @@
+machine OnlineLibrarySystem
+sees OnlineLibrarySystemContext
+
+/*Declaring the variables we are going to use */
+variables 
+    registeredUsers//Set of registered users
+    administrators//Set of administrators
+    lecturers
+    loggedInUsers
+    loggingPassword
+    
+/*Handling the invariants */
+invariants
+    @inv1: registeredUsers ⊆ USER
+    @inv2: administrators ⊆ registeredUsers
+    @inv3: lecturers ⊆ registeredUsers
+    @inv4: administrators ∩ lecturers = ∅
+    @inv5: rootUser ∈ administrators
+    @inv6: loggingPassword ∈ registeredUsers → PASSWORD
+    @inv7: loggedInUsers ⊆ registeredUsers
+events
+
+/*Initializing our sets */
+event INITIALISATION
+begin
+    @beg1:registeredUsers ≔ ∅ ∪ {rootUser}
+    @beg2:administrators ≔ ∅ ∪ {rootUser}
+    @beg3:lecturers ≔ ∅
+    @beg4:loggedInUsers ≔ ∅
+    @beg5:loggingPassword ≔ ∅ ∪ {rootUser ↦ defaultPassword}
+end
+
+/*The event to log in a user */
+event LogIn
+any u p where
+    @grd1:u ∈ registeredUsers//Check if u is a registered user
+    @grd2: p ∈ PASSWORD //Check if p is the set of PASSWORD
+    @grd3:loggingPassword(u) = p //Check if the user and its password are correct
+then
+    @act1:loggedInUsers ≔ loggedInUsers ∪ {u}//Add the user to the logged in user set
+end
+
+/*The event to log out */
+event LogOut
+any u where
+    @grd1:u ∈ loggedInUsers//Check if u is logged in
+then
+    @act1:loggedInUsers ≔ loggedInUsers ∖ {u}//Remove u from the logged in users
+end
+
+/*The even to register a new user */
+event RegisterUser
+any a u p where
+    @grd1: u ∉ registeredUsers//Check if u is not part of the registeredUsers
+    @grd2: u ∈ USER//Check if u is part of USER
+    @grd3: a ∈ administrators//Check if a is administrator to allow registering a user
+    @grd4: p ∈ PASSWORD//Check is p is part of PASSWORD
+then
+    /*Register the new user u and the password to this user */
+    @act1: registeredUsers ≔ registeredUsers ∪ {u}
+    @act3: loggingPassword(u) ≔ p
+end
+
+/*The event to change the password */
+event ChangePassword
+any u p where
+    @grd1: u ∈ loggedInUsers//Check if u is a logged in user
+    @grd2: p ∈ PASSWORD//Check if p is part of PASSWORD
+then
+    @act1: loggingPassword(u) ≔ p//Change the password to p
+end
+
+/*The event to change to administrator */
+event ChangeToAdministrator
+	any a u where
+		@grd1: a ∈ administrators//Check if a is and administrator
+		@grd2: u ∈ registeredUsers ∖ (lecturers ∪ administrators)//Check if u is part of registered users who are not lecturers or administrators
+	then
+		@act1: administrators ≔ administrators ∪ {u}//Add u to the administrators
+	end
+	
+/*The event to change to lecturer */
+event ChangeToLecturer
+	any a u where
+		@grd1: a ∈ administrators//Check if a is an administrator
+		@grd2: u ∈ registeredUsers ∖ (administrators ∪ lecturers)//Check if u is a registered user but not an administrator and not a lecturer
+	then
+		@act1: lecturers ≔ lecturers ∪ {u}//Add u to the lecturers
+	end	
+
+end

@@ -1,0 +1,10 @@
+context ResourceContext
+sets
+RESOURCE
+TITLES
+URLS
+AUTHORS 
+ISBN
+PUBLISHER
+PUBLISHED_YEAR
+end
